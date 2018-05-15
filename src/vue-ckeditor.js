@@ -68,7 +68,7 @@ export default {
             this.instance = editor
 
             const instance = this.instance
-            instance.isReadOnly = this.readOnly
+            instance.isReadOnly = this.readonly
             instance.model.document.on('change', this.update)
             instance.setData(this.value)
           })
