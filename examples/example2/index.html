@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>List Rendering</title>
+
+  <!-- Vue -->
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+  <!-- ClassicEditor -->
+  <script src="https://cdn.ckeditor.com/ckeditor5/10.0.0/classic/ckeditor.js"></script>
+
+  <!-- VueCkeditor -->
+  <script src="../../dist/vue-ckeditor5.js"></script>
+</head>
+
+<body>
+  <div id="app"></div>
+
+  <script>
+    Vue.use(VueCkeditor.plugin, {
+      editors: {
+        'classic': ClassicEditor
+      }
+    })
+
+    new Vue({
+      el: '#app',
+      data: {
+        items: [
+          {
+            content: '<p>content0</p>',
+            show: false,
+            title: 'title0'
+          },
+          {
+            content: '<p>content1</p>',
+            show: true,
+            title: 'title1'
+          },
+          {
+            content: '<p>content2</p>',
+            show: false,
+            title: 'title2'
+          },
+          {
+            content: '<p>content3</p>',
+            show: true,
+            title: 'title3'
+          },
+        ]
+      },
+      computed: {
+        filteredItems () {
+          return this.items.filter(item => item.show);
+        }
+      },
+      methods: {
+        toggleShowItem (index) {
+          const items = this.items;
+
+          if (index < items.length) {
+            const item = items[index];
+
+            item.show = !item.show
+          }
+        }
+      },
+      template: `
+        <div>
+          <ul v-if="items.length">
+            <li v-for="(item, index) in items" :key="'button' + index">
+              <h4>{{ item.title }}</h4>
+              <button type="button" @click="toggleShowItem(index)">Change status 'show'</button>
+            </li>
+          </ul>
+          <hr />
+          <ul v-if="filteredItems.length">
+            <li v-for="(item, index) in filteredItems" :key="'ckeditor' + index">
+              <h4>{{ item.title }}</h4>
+              <vue-ckeditor type="classic" v-model="item.content"></vue-ckeditor>
+            </li>
+          </ul>
+        </div>
+      `
+    })
+  </script>
+</body>
+
+</html>
