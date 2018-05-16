@@ -1,6 +1,6 @@
 {
   "name": "vue-ckeditor5",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "CKEditor 5 component for Vue 2.",
   "author": "Igor Iakovlev <igorxut@gmail.com>",
   "license": "MIT",
