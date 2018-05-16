@@ -46,6 +46,19 @@ export default {
     }
   },
 
+  watch: {
+    value: function (newValue) {
+      const instance = this.instance
+
+      if (
+        instance != null &&
+        newValue !== instance.getData()
+      ) {
+        instance.setData(newValue)
+      }
+    }
+  },
+
   methods: {
     create: function () {
       if (this.instance == null) {
