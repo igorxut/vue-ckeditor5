@@ -7,8 +7,8 @@
 <h2>Description</h2>
 
 <div>
-  <a href="https://github.com/ckeditor" target="_blank"><img alt="Vue 2" src="https://vuejs.org/images/logo.png" title="Vue 2" width="50" /></a>
-  <a href="https://github.com/vuejs/vue" target="_blank"><img alt="CKEditor 5" src="https://avatars2.githubusercontent.com/u/825710?s=200&v=4" title="CKEditor 5" width="50" /></a>
+  <a href="https://github.com/vuejs/vue" target="_blank"><img alt="Vue 2" src="https://vuejs.org/images/logo.png" title="Vue 2" width="50" /></a>
+  <a href="https://github.com/ckeditor" target="_blank"><img alt="CKEditor 5" src="https://avatars2.githubusercontent.com/u/825710?s=200&v=4" title="CKEditor 5" width="50" /></a>
 </div>
 
 <p>Component CKEditor&nbsp;5 for Vue&nbsp;2.</p>
