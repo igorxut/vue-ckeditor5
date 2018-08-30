@@ -79,6 +79,7 @@ export default {
           .create(this.$el, this.config)
           .then(editor => {
             this.instance = editor
+            this.$emit('ready', editor)
 
             const instance = this.instance
             instance.isReadOnly = this.readonly
