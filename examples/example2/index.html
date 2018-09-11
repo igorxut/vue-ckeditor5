@@ -56,6 +56,13 @@
         }
       },
       methods: {
+        print (...args) {
+          for (let index = 0, length = args.length; index < length; ++index) {
+            console.log(args[index])
+          }
+
+          console.log('\n')
+        },
         toggleShowItem (index) {
           const items = this.items;
 
@@ -78,7 +85,12 @@
           <ul v-if="filteredItems.length">
             <li v-for="(item, index) in filteredItems" :key="'ckeditor' + index">
               <h4>{{ item.title }}</h4>
-              <vue-ckeditor type="classic" v-model="item.content"></vue-ckeditor>
+              <vue-ckeditor
+                type="classic"
+                v-model="item.content"
+                @ready="print($event, 'ready')"
+                @destroy="print($event, 'destroy')"
+              ></vue-ckeditor>
             </li>
           </ul>
         </div>
