@@ -96,6 +96,7 @@ export default {
 
       if (instance != null) {
         instance.destroy()
+        this.$emit('destroy', instance)
       }
     },
     update: function () {
