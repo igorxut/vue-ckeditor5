@@ -185,6 +185,13 @@ new Vue({
       <td>Key for CKEditor&nbsp;5 implementation of '<a href="#prop-type" target="_blank">editors</a>' prop.</td>
     </tr>
     <tr>
+      <td>uploadAdapter</td>
+      <td>Function</td>
+      <td>false</td>
+      <td>null</td>
+      <td><a href='https://ckeditor.com/docs/ckeditor5/latest/api/module_upload_filerepository-UploadAdapter.html'>CKEditor UploadAdapter implementation</a>.</td>
+    </tr>
+    <tr>
       <td>value</td>
       <td>String</td>
       <td>true</td>

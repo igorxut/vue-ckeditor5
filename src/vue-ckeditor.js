@@ -33,6 +33,12 @@ export default {
       type: String
     },
 
+    uploadAdapter: {
+      default: () => null,
+      required: false,
+      type: Function
+    },
+
     value: {
       default: () => '',
       required: false,
@@ -79,6 +85,9 @@ export default {
           .create(this.$el, this.config)
           .then(editor => {
             this.instance = editor
+
+            this.createUploadAdapter()
+
             this.$emit('ready', editor)
 
             const instance = this.instance
@@ -89,6 +98,21 @@ export default {
           .catch(error => {
             console.log(error)
           })
+      }
+    },
+    createUploadAdapter: function () {
+      const UploadAdapter = this.uploadAdapter
+      const instance = this.instance
+
+      if (
+        UploadAdapter != null &&
+        instance != null
+      ) {
+        const fileRepository = instance.plugins.get('FileRepository')
+
+        if (fileRepository != null) {
+          fileRepository.createUploadAdapter = (loader) => new UploadAdapter(loader)
+        }
       }
     },
     destroy: function () {
