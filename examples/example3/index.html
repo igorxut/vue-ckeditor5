@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CKEditor with UploadAdapter</title>
+
+  <!-- Vue -->
+  <script src="//cdn.jsdelivr.net/npm/vue"></script>
+
+  <!-- ClassicEditor -->
+  <script src="//cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script>
+
+  <!-- VueCkeditor -->
+  <script src="../../dist/vue-ckeditor5.js"></script>
+</head>
+
+<body>
+  <div id="app"></div>
+
+  <script>
+    Vue.use(VueCkeditor.plugin, {
+      editors: {
+        'classic': ClassicEditor
+      }
+    })
+
+    new Vue({
+      el: '#app',
+      data: {
+        htmlContent: '<p><strong>html</strong><i>Content</i></p>',
+
+        <!-- this is example of UploadAdapter implementation -->
+        UploadAdapter: function (loader) {
+          this.loader = loader
+
+          this.upload = () => {
+            const body = new FormData();
+            body.append('file', this.loader.file);
+
+            <!-- write your url for uploading and build your Request -->
+            return fetch('http://domain/upload', {
+              body: body,
+              method: 'POST'
+            })
+              .then(response => response.json())
+              .then(downloadUrl => {
+                return {
+                  <!-- return your url for downloading -->
+                  default: downloadUrl
+                }
+              })
+              .catch(error => {
+                console.log(error);
+              });
+          }
+
+          this.abort = () => {
+            console.log('Abort upload.')
+          }
+        }
+      },
+      template: `
+        <div>
+          <vue-ckeditor type="classic" v-model="htmlContent" :upload-adapter="UploadAdapter"></vue-ckeditor><br /><br />
+          <div>{{ htmlContent }}</div>
+        </div>
+      `
+    })
+  </script>
+</body>
+
+</html>
