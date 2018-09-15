@@ -4,7 +4,7 @@ const DefinePlugin = require('webpack').DefinePlugin
 module.exports = {
   mode: 'production',
   devtool: 'source-map',
-  entry: "./src/index.js",
+  entry: './src/index.js',
   resolve: {
     extensions: [
       '.js'
