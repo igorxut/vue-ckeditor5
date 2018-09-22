@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DecoupledEditor example</title>
+
+  <!-- Vue -->
+  <script src="//cdn.jsdelivr.net/npm/vue"></script>
+
+  <!-- DecoupledEditor -->
+  <script src="//cdn.ckeditor.com/ckeditor5/11.0.1/decoupled-document/ckeditor.js"></script>
+
+  <!-- VueCkeditor -->
+  <script src="../../dist/vue-ckeditor5.js"></script>
+
+  <!-- Styles from https://ckeditor.com/docs/ckeditor5/latest/framework/guides/ui/document-editor.html#the-user-interface -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div id="app"></div>
+
+  <script>
+    Vue.use(VueCkeditor.plugin, {
+      editors: {
+        'document': DecoupledEditor
+      }
+    })
+
+    new Vue({
+      el: '#app',
+      data: {
+        htmlContent: '<p><strong>html</strong><i>Content</i></p>',
+      },
+      template: `
+        <div>
+          <div class="document-editor">
+            <div id="toolbar" class="document-editor__toolbar"></div>
+
+            <div class="document-editor__editable-container">
+              <div class="document-editor__editable">
+                <vue-ckeditor toolbar-container="#toolbar" type="document" v-model="htmlContent"></vue-ckeditor>
+              </div>
+            </div>
+          </div>
+        </div>
+      `
+    })
+  </script>
+</body>
+
+</html>
