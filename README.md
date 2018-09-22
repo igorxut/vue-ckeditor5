@@ -178,18 +178,25 @@ new Vue({
       <td>Read-only mode for CKEditor&nbsp;5 instance.</td>
     </tr>
     <tr>
+      <td><a name="prop-type">toolbarContainer</a></td>
+      <td>String</td>
+      <td>false</td>
+      <td>null</td>
+      <td>CSS-selector of DOM-element for CKEditor toolbar. The element is searched by <a href="//developer.mozilla.org/en-US/docs/Web/API/Document/querySelector" target="_blank">Document.querySelector()</a>.</td>
+    </tr>
+    <tr>
       <td><a name="prop-type">type</a></td>
       <td>String</td>
       <td>true</td>
       <td></td>
-      <td>Key for CKEditor&nbsp;5 implementation of '<a href="#prop-type" target="_blank">editors</a>' prop.</td>
+      <td>Key for CKEditor&nbsp;5 implementation of '<a href="#prop-type">editors</a>' prop.</td>
     </tr>
     <tr>
       <td>uploadAdapter</td>
       <td>Function</td>
       <td>false</td>
       <td>null</td>
-      <td><a href='https://ckeditor.com/docs/ckeditor5/latest/api/module_upload_filerepository-UploadAdapter.html'>CKEditor UploadAdapter implementation</a>.</td>
+      <td><a href="https://ckeditor.com/docs/ckeditor5/latest/api/module_upload_filerepository-UploadAdapter.html" target="_blank">CKEditor UploadAdapter implementation</a>.</td>
     </tr>
     <tr>
       <td>value</td>

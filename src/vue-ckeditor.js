@@ -28,6 +28,12 @@ export default {
       type: Boolean
     },
 
+    toolbarContainer: {
+      default: () => null,
+      required: false,
+      type: String
+    },
+
     type: {
       required: true,
       type: String
@@ -88,6 +94,8 @@ export default {
 
             this.createUploadAdapter()
 
+            this.createToolbarContainer()
+
             this.$emit('ready', editor)
 
             const instance = this.instance
@@ -98,6 +106,21 @@ export default {
           .catch(error => {
             console.log(error)
           })
+      }
+    },
+    createToolbarContainer: function () {
+      const instance = this.instance
+      const toolbarContainer = this.toolbarContainer
+
+      if (
+        toolbarContainer != null &&
+        instance != null
+      ) {
+        const toolbarContainerElement = document.querySelector(toolbarContainer)
+
+        if (toolbarContainerElement != null) {
+          toolbarContainerElement.appendChild(instance.ui.view.toolbar.element)
+        }
       }
     },
     createUploadAdapter: function () {
