@@ -47,13 +47,11 @@ npm install vue-ckeditor5
 ```javascript
 import Vue from 'vue'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
-import BalloonEditor from '@ckeditor/ckeditor5-build-balloon'
 import VueCkeditor from 'vue-ckeditor5'
 
 const options = {
   editors: {
     classic: ClassicEditor,
-    balloon: BalloonEditor
   },
   name: 'ckeditor'
 }
@@ -65,7 +63,6 @@ Vue.use(VueCkeditor.plugin, options);
 
 ```html
 <ckeditor type="classic" v-model="value1"></ckeditor>
-<ckeditor type="balloon" v-model="value2"></ckeditor>
 ```
 
 <h5>Plugin options</h5>
@@ -111,8 +108,6 @@ Vue.use(VueCkeditor.plugin, options);
 ```javascript
 import Vue from 'vue'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
-import BalloonEditor from '@ckeditor/ckeditor5-build-balloon'
-import InlineEditor from '@ckeditor/ckeditor5-build-inline'
 import VueCkeditor from 'vue-ckeditor5'
 
 new Vue({
@@ -123,17 +118,12 @@ new Vue({
   data: {
     value1: 'hello',
     value2: 'world',
-    editors1: {
-      classic: ClassicEditor,
-      balloon: BalloonEditor
-    },
-    editors2: {
-      inline: InlineEditor
-    },
+    editors: {
+      classic: ClassicEditor
+    }
   },
   template:
-  `<vue-ckeditor type="classic" v-model="value1" :editors="editors1"></vue-ckeditor>
-  <vue-ckeditor type="inline" v-model="value2" :editors="editors2"></vue-ckeditor>`
+  `<vue-ckeditor type="classic" v-model="value1" :editors="editors"></vue-ckeditor>`
 })
 ```
 
