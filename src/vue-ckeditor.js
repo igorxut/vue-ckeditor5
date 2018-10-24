@@ -1,7 +1,11 @@
 export default {
   name: 'vue-ckeditor',
 
-  render: createElement => createElement('div'),
+  render(createElement) {
+    return createElement('div', {
+      attrs: this.$attrs
+    })
+  },
 
   props: {
     config: {
