@@ -1,8 +1,8 @@
 export default {
   name: 'vue-ckeditor',
 
-  render(createElement) {
-    return createElement('div', {
+  render (createElement) {
+    return createElement(this.tag, {
       attrs: this.$attrs
     })
   },
@@ -30,6 +30,12 @@ export default {
       default: () => false,
       required: false,
       type: Boolean
+    },
+
+    tag: {
+      default: () => 'div',
+      required: false,
+      type: String
     },
 
     toolbarContainer: {
