@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Check events</title>
+
+  <!-- Vue -->
+  <script src="//cdn.jsdelivr.net/npm/vue"></script>
+
+  <!-- ClassicEditor -->
+  <script src="//cdn.ckeditor.com/ckeditor5/11.1.1/classic/ckeditor.js"></script>
+
+  <!-- VueCkeditor -->
+  <script src="../../dist/vue-ckeditor5.js"></script>
+
+  <style>
+    .log {
+      border: 1px solid black;
+      min-height: 1rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app"></div>
+
+  <script>
+    Vue.use(VueCkeditor.plugin, {
+      editors: {
+        'classic': ClassicEditor,
+      }
+    })
+
+    new Vue({
+      el: '#app',
+      data: {
+        htmlContent: '<p><strong>html</strong><i>Content</i></p>',
+        eventsLog: ''
+      },
+      methods: {
+        addEventLog (eventName, ...args) {
+          const eventValue = `Event: '${eventName}'.`
+
+          this.eventsLog += `<p>${eventValue} Check debugger console.</p>`
+
+          console.log(eventValue)
+          for (let index = 0, length = args.length; index < length; ++index) {
+            console.log(args[index])
+          }
+          console.log('\n')
+        }
+      },
+      template: `
+        <div>
+          <vue-ckeditor
+            type="classic"
+            v-model="htmlContent"
+            @blur="(...args) => { addEventLog('blur', ...args) }"
+            @change="(...args) => { addEventLog('change', ...args) }"
+            @click="(...args) => { addEventLog('click', ...args) }"
+            @clipboard-input="(...args) => { addEventLog('clipboardInput', ...args) }"
+            @clipboard-output="(...args) => { addEventLog('clipboardOutput', ...args) }"
+            @compositionend="(...args) => { addEventLog('compositionend', ...args) }"
+            @compositionstart="(...args) => { addEventLog('compositionstart', ...args) }"
+            @copy="(...args) => { addEventLog('copy', ...args) }"
+            @cut="(...args) => { addEventLog('cut', ...args) }"
+            @delete="(...args) => { addEventLog('delete', ...args) }"
+            @destroy="(...args) => { addEventLog('destroy', ...args) }"
+            @dragover="(...args) => { addEventLog('dragover', ...args) }"
+            @drop="(...args) => { addEventLog('drop', ...args, ) }"
+            @enter="(...args) => { addEventLog('enter', ...args) }"
+            @focus="(...args) => { addEventLog('focus', ...args) }"
+            @keydown="(...args) => { addEventLog('keydown', ...args) }"
+            @keyup="(...args) => { addEventLog('keyup', ...args) }"
+            @layout-changed="(...args) => { addEventLog('layoutChanged', ...args) }"
+            @mousedown="(...args) => { addEventLog('mousedown', ...args) }"
+            @mutations="(...args) => { addEventLog('mutations', ...args) }"
+            @paste="(...args) => { addEventLog('paste', ...args) }"
+            @ready="(...args) => { addEventLog('ready', ...args) }"
+            @selection-change="(...args) => { addEventLog('selectionChange', ...args) }"
+           ></vue-ckeditor><br /><br />
+
+          <button @click="eventsLog=''">Clear event's log.</button><br/><br/>
+          <div class="log" v-html="eventsLog"></div>
+        </div>
+      `
+    })
+  </script>
+</body>
+
+</html>
