@@ -56,11 +56,11 @@
         }
       },
       methods: {
-        print (...args) {
+        print (eventName, ...args) {
+          console.log(eventName)
           for (let index = 0, length = args.length; index < length; ++index) {
             console.log(args[index])
           }
-
           console.log('\n')
         },
         toggleShowItem (index) {
@@ -88,8 +88,8 @@
               <vue-ckeditor
                 type="classic"
                 v-model="item.content"
-                @ready="print($event, 'ready')"
-                @destroy="print($event, 'destroy')"
+                @ready="(...args) => { print('ready', ...args) }"
+                @destroy="(...args) => { print('destroy', ...args) }"
               ></vue-ckeditor>
             </li>
           </ul>
