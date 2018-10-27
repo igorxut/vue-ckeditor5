@@ -168,6 +168,13 @@ new Vue({
       <td>Read-only mode for CKEditor&nbsp;5 instance.</td>
     </tr>
     <tr>
+      <td>tag</td>
+      <td>String</td>
+      <td>false</td>
+      <td><code>div</code></td>
+      <td>HTMLElement for rendering.</td>
+    </tr>
+    <tr>
       <td><a name="prop-type">toolbarContainer</a></td>
       <td>String</td>
       <td>false</td>
@@ -197,6 +204,66 @@ new Vue({
     </tr>
   </tbody>
 </table>
+
+<h3>Normal HTML attributes</h3>
+
+<p>You can bind normal HTML attributes to component like this (<code>data-api</code> for example):</p>
+
+```html
+<vue-ckeditor type="classic" v-model="value" data-api="1"></vue-ckeditor>
+```
+
+<h2>Component's events</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>name</th>
+      <th>parameters</th>
+      <th>description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ready(instance)</td>
+      <td>
+        <dl>
+            <dt><strong>instance</strong><dt>
+            <dd>Instance of CKEditor.</dd>
+        </dl>
+      </td>
+      <td>Instance of CKEditor is ready.</td>
+    </tr>
+    <tr>
+      <td>destroy(instance)</td>
+      <td>
+        <dl>
+            <dt><strong>instance</strong><dt>
+            <dd>Instance of CKEditor.</dd>
+        </dl>
+      </td>
+      <td>Instance of CKEditor is destroyed.</td>
+    </tr>
+    <tr>
+      <td>input(newValue, instance, eventInfo, batch)</td>
+      <td>
+        <dl>
+            <dt><strong>newValue</strong><dt>
+            <dd>New value of CKEditor's data.</dd>
+            <dt><strong>instance</strong><dt>
+            <dd>Instance of CKEditor.</dd>
+            <dt><strong>eventInfo</strong><dt>
+            <dd>An object containing information about the fired event.</dd>
+            <dt><strong>batch</strong><dt>
+            <dd>The batch that was used in the executed changes block.</dd>
+        </dl>
+      </td>
+      <td>Data is changed.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Events from <a href="https://ckeditor.com/docs/ckeditor5/latest/api/module_engine_view_document-Document.html#event-change:isComposing" target="_blank">engine.view.document</a> (check <a href="https://github.com/igorxut/vue-ckeditor5/blob/master/examples/example5" target="_blank">example5</a>).</p>
 
 <h2>License</h2>
 
