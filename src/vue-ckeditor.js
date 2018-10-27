@@ -69,7 +69,7 @@ export default {
   },
 
   watch: {
-    value: function (newValue) {
+    value (newValue) {
       const instance = this.instance
 
       if (
@@ -82,7 +82,7 @@ export default {
   },
 
   methods: {
-    create: function () {
+    create () {
       if (this.instance == null) {
         const type = this.type
         const editors = this.$VueCkeditorEditors || this.editors
@@ -101,24 +101,25 @@ export default {
           .create(this.$el, this.config)
           .then(editor => {
             this.instance = editor
+            const instance = this.instance
 
             this.createUploadAdapter()
 
             this.createToolbarContainer()
 
-            this.$emit('ready', editor)
+            this.setEventListeners()
 
-            const instance = this.instance
             instance.isReadOnly = this.readonly
-            instance.model.document.on('change', this.update)
             instance.setData(this.value)
+
+            this.$emit('ready', instance)
           })
           .catch(error => {
             console.log(error)
           })
       }
     },
-    createToolbarContainer: function () {
+    createToolbarContainer () {
       const instance = this.instance
       const toolbarContainer = this.toolbarContainer
 
@@ -133,7 +134,7 @@ export default {
         }
       }
     },
-    createUploadAdapter: function () {
+    createUploadAdapter () {
       const UploadAdapter = this.uploadAdapter
       const instance = this.instance
 
@@ -148,7 +149,7 @@ export default {
         }
       }
     },
-    destroy: function () {
+    destroy () {
       const instance = this.instance
 
       if (instance != null) {
@@ -156,11 +157,25 @@ export default {
         this.$emit('destroy', instance)
       }
     },
-    update: function () {
-      const value = this.instance.getData()
+    setEventListeners () {
+      const instance = this.instance
 
-      if (this.value !== value) {
-        this.$emit('input', value)
+      if (instance != null) {
+        instance.model.document.on('change:data', (...args) => {
+          const newValue = instance.getData()
+
+          if (this.value !== newValue) {
+            this.$emit('input', newValue, instance, ...args)
+          }
+        })
+
+        const editingViewDocument = instance.editing.view.document
+        const events = editingViewDocument._events
+        for (const key of Object.keys(events)) {
+          editingViewDocument.on(key, (...args) => {
+            this.$emit(key, instance, ...args)
+          })
+        }
       }
     }
   },
