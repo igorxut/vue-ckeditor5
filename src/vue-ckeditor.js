@@ -59,6 +59,9 @@ export default {
       default: () => '',
       required: false,
       type: String
+    },
+    emptyValue: {
+      default: '',
     }
   },
 
@@ -79,6 +82,16 @@ export default {
         instance.setData(newValue)
       }
     }
+  },
+
+  computed: {
+    emptyValueProvided() {
+      return 'emptyValue' in this.$options.propsData
+    },
+    isEmpty() {
+      const document = this.instance.model.document
+      return document.model.hasContent(document.getRoot())
+    },
   },
 
   methods: {
@@ -162,9 +175,12 @@ export default {
 
       if (instance != null) {
         instance.model.document.on('change:data', (...args) => {
-          const newValue = instance.getData()
+          let newValue = instance.getData()
 
           if (this.value !== newValue) {
+            if (this.emptyValueProvided && this.isEmpty) {
+              newValue = this.emptyValue
+            }
             this.$emit('input', newValue, instance, ...args)
           }
         })
