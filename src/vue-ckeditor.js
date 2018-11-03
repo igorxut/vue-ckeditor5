@@ -90,7 +90,7 @@ export default {
     },
     isEmpty() {
       const document = this.instance.model.document
-      return document.model.hasContent(document.getRoot())
+      return !document.model.hasContent(document.getRoot())
     },
   },
 
