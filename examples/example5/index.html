@@ -78,7 +78,7 @@
             @paste="(...args) => { addEventLog('paste', ...args) }"
             @ready="(...args) => { addEventLog('ready', ...args) }"
             @selection-change="(...args) => { addEventLog('selectionChange', ...args) }"
-           ></vue-ckeditor><br /><br />
+          ></vue-ckeditor><br /><br />
 
           <button @click="eventsLog=''">Clear event's log.</button><br/><br/>
           <div class="log" v-html="eventsLog"></div>
