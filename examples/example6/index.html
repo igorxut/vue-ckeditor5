@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Empty value</title>
+
+  <!-- Vue -->
+  <script src="//cdn.jsdelivr.net/npm/vue"></script>
+
+  <!-- ClassicEditor -->
+  <script src="//cdn.ckeditor.com/ckeditor5/11.1.1/classic/ckeditor.js"></script>
+
+  <!-- VueCkeditor -->
+  <script src="../../dist/vue-ckeditor5.js"></script>
+
+  <style>
+    code {
+      padding: 2px 4px;
+      font-size: 90%;
+      color: #c7254e;
+      background-color: #f9f2f4;
+      border-radius: 4px;
+    }
+    .preview {
+      border: 1px solid black;
+      min-height: 1rem;
+    }
+    .list dt {
+      float: left;
+      width: 10%;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app"></div>
+
+  <script>
+    Vue.use(VueCkeditor.plugin, {
+      editors: {
+        'classic': ClassicEditor,
+      }
+    })
+
+    new Vue({
+      el: '#app',
+      data: {
+        content1: '<p>content1</p>',
+        content2: '<p>content2</p>',
+        content3: '<p>content3</p>',
+        content4: '<p>content4</p>',
+        content5: '<p>content5</p>',
+        content6: '<p>content6</p>'
+      },
+      methods: {
+        clean () {
+          this.content1 = ''
+          this.content2 = ''
+          this.content3 = ''
+          this.content4 = ''
+          this.content5 = ''
+          this.content6 = ''
+        }
+      },
+      template: `
+        <div>
+          <button @click="clean">Clean all</button><br /><br />
+
+          <div class="preview">
+            <template v-for="(item, index) in [content1, content2, content3, content4, content5, content6]">
+              <dl class="list">
+                <dt>name:</dt>
+                <dd>content{{ index + 1 }}</dd>
+
+                <dt>type:</dt>
+                <dd>{{ typeof item }}</dd>
+
+                <dt>value:</dt>
+                <dd>{{ item }}</dd>
+              </dl><br />
+            </template>
+          </div>
+
+          <h3>Content1. Default value is not provided.</h3>
+          <vue-ckeditor type="classic" v-model="content1"></vue-ckeditor><br />
+
+          <h3>Content2. Default empty value is <code>''</code>.</h3>
+          <vue-ckeditor type="classic" v-model="content2" empty-value=""></vue-ckeditor><br />
+
+          <h3>Content3. Default empty value is <code>'empty'</code>.</h3>
+          <vue-ckeditor type="classic" v-model="content3" empty-value="empty"></vue-ckeditor><br />
+
+          <h3>Content4. Default empty value is <code>null</code>.</h3>
+          <vue-ckeditor type="classic" v-model="content4" :empty-value="null"></vue-ckeditor><br />
+
+          <h3>Content5. Default empty value is <code>false</code>.</h3>
+          <vue-ckeditor type="classic" v-model="content5" :empty-value="false"></vue-ckeditor>
+
+          <h3>Content6. Default empty value is <code>undefined</code>.</h3>
+          <vue-ckeditor type="classic" v-model="content6" :empty-value="undefined"></vue-ckeditor>
+        </div>
+      `
+    })
+  </script>
+</body>
+
+</html>
