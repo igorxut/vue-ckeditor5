@@ -32,6 +32,11 @@ export default {
       type: Boolean
     },
 
+    emptyValue: {
+      required: false,
+      type: String
+    },
+
     tag: {
       default: () => 'div',
       required: false,
@@ -59,9 +64,6 @@ export default {
       default: () => '',
       required: false,
       type: String
-    },
-    emptyValue: {
-      default: '',
     }
   },
 
@@ -77,7 +79,11 @@ export default {
 
       if (
         instance != null &&
-        newValue !== instance.getData()
+        newValue !== instance.getData() &&
+        !(
+          this.emptyValueProvided &&
+          newValue === this.emptyValue
+        )
       ) {
         instance.setData(newValue)
       }
@@ -85,13 +91,13 @@ export default {
   },
 
   computed: {
-    emptyValueProvided() {
-      return 'emptyValue' in this.$options.propsData
+    emptyValueProvided () {
+      return this.$options.propsData.hasOwnProperty('emptyValue')
     },
-    isEmpty() {
+    isEmpty () {
       const document = this.instance.model.document
       return !document.model.hasContent(document.getRoot())
-    },
+    }
   },
 
   methods: {
@@ -178,9 +184,13 @@ export default {
           let newValue = instance.getData()
 
           if (this.value !== newValue) {
-            if (this.emptyValueProvided && this.isEmpty) {
+            if (
+              this.emptyValueProvided &&
+              this.isEmpty
+            ) {
               newValue = this.emptyValue
             }
+
             this.$emit('input', newValue, instance, ...args)
           }
         })
