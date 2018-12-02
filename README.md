@@ -161,6 +161,13 @@ new Vue({
       </td>
     </tr>
     <tr>
+      <td>emptyValue</td>
+      <td></td>
+      <td>false</td>
+      <td></td>
+      <td>Set if you want to change the '<a href="https://vuejs.org/v2/guide/components-custom-events.html#Customizing-Component-v-model" target="_blank">v-model</a>' value of emptiness editor.</td>
+    </tr>
+    <tr>
       <td>readonly</td>
       <td>Boolean</td>
       <td>false</td>
