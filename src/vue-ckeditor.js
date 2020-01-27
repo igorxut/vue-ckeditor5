@@ -92,7 +92,7 @@ export default {
 
   computed: {
     emptyValueProvided () {
-      return this.$options.propsData.hasOwnProperty('emptyValue')
+      return Object.prototype.hasOwnProperty.call(this.$options.propsData, 'emptyValue')
     },
     isEmpty () {
       const document = this.instance.model.document
@@ -107,7 +107,7 @@ export default {
         const editors = this.$VueCkeditorEditors || this.editors
 
         if (!Object.keys(editors).length) {
-          throw new Error(`There are no CKEditor 5 implementations.`)
+          throw new Error('There are no CKEditor 5 implementations.')
         }
 
         const editor = editors[type]
