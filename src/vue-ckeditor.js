@@ -54,12 +54,6 @@ export default {
       type: String
     },
 
-    uploadAdapter: {
-      default: () => null,
-      required: false,
-      type: Function
-    },
-
     value: {
       default: () => '',
       required: false,
@@ -122,8 +116,6 @@ export default {
             this.instance = editor
             const instance = this.instance
 
-            this.createUploadAdapter()
-
             this.createToolbarContainer()
 
             this.setEventListeners()
@@ -150,21 +142,6 @@ export default {
 
         if (toolbarContainerElement != null) {
           toolbarContainerElement.appendChild(instance.ui.view.toolbar.element)
-        }
-      }
-    },
-    createUploadAdapter () {
-      const UploadAdapter = this.uploadAdapter
-      const instance = this.instance
-
-      if (
-        UploadAdapter != null &&
-        instance != null
-      ) {
-        const fileRepository = instance.plugins.get('FileRepository')
-
-        if (fileRepository != null) {
-          fileRepository.createUploadAdapter = (loader) => new UploadAdapter(loader)
         }
       }
     },
