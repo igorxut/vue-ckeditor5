@@ -13,6 +13,8 @@
 
 <p>Component CKEditor&nbsp;5 for Vue&nbsp;2.</p>
 
+<p>Project is outdated. See <a href="https://github.com/ckeditor/ckeditor5-vue" target="_blank">official release</a>.</p>
+
 <h2>Installation</h2>
 
 <h3>NMP</h3>
